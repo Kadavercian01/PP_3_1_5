@@ -1,23 +1,73 @@
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
-    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>User page</title>
 </head>
 <body>
-<h1 th:text="${'Hello ' + authUser.getFirsName()}"/>
-<br>
-<p th:text="${'Your id: ' + authUser.getId()}"/>
-<br>
-<p th:text="${'Your firs name: ' + authUser.getFirsName()}"/>
-<br>
-<p th:text="${'Your lastname: ' + authUser.getLastName()}"/>
-<br>
-<p th:text="${'Your email: ' + authUser.getEmail()}"/>
-<br><br>
-<form action="/logout">
-    <button type="submit">logout</button>
-</form>
+<div class="container-fluid p-0 bg-dark text-white">
+    <div class="row">
+        <div class="col">
+            <div class="d-inline-flex m-0 p-0">
+                <p class="pl-4 pt-1 pb-1 m-0 font-weight-bold " th:text="${authUser.getEmail()}"></p>
+                <p class="pt-1 pb-1 m-0 pl-1" th:text="${'with roles: ' + authUser.getRoles()}"></p>
+            </div>
+        </div>
+      <div class="col">
+          <div class="d-flex flex-row-reverse">
+            <form action="/logout" class="bg-transparent pt-1 pb-1 pr-4">
+                <button type="submit" class="p-o m-0 border-0 bg-transparent text-muted">Logout</button>
+            </form>
+          </div>
+     </div>
+    </div>
+</div>
+<div class="container-fluid p-0 m-0 vh-100">
+    <div class="row m-0 vh-100">
+        <div class="col-2 p-0 vh-100 bg-white">
+            <div class="mt-2 bg-primary text-white rounded">
+                <p class="m-0 p-2" th:text="${authUser.getFirsName()}"></p>
+            </div>
+        </div>
+        <div class="col-10 bg-light vh-100">
+            <h1 class="pt-2 pl-2">User information-page</h1>
+            <div class="bg-light m-3 border rounded">
+                <div class="bg-light border-bottom">
+                    <h4 class="p-3 ml-2">About user</h4>
+                </div>
+                <div class="bg-white">
+                    <div class="p-4 m-0">
+                    <table class="table border-0">
+                        <tbody>
+                        <tr class="border-top border-bottom">
+                            <th scope="col">ID</th>
+                            <th scope="col">First Name</th>
+                            <th scope="col">Last Name</th>
+                            <th scope="col">Age</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Role</th>
+                        </tr>
+                        <tr class="bg-light">
+                            <th class="font-weight-normal" scope="col" th:text="${authUser.getId()}"></th>
+                            <th class="font-weight-normal" scope="col" th:text="${authUser.getFirsName()}"></th>
+                            <th class="font-weight-normal" scope="col" th:text="${authUser.getLastName()}"></th>
+                            <th class="font-weight-normal" scope="col" th:text="${authUser.getId()}"></th>
+                            <th class="font-weight-normal" scope="col" th:text="${authUser.getEmail()}"></th>
+                            <th class="font-weight-normal" scope="col" th:text="${authUser.getRoles()}"></th>
+                            </th>
+                        </tr>
+                        </tbody>
+                    </table>
+                    </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>
