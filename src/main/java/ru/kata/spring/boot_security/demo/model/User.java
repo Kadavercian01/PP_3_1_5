@@ -17,13 +17,16 @@ public class User implements UserDetails {
     private long id;
 
     @Column
-    private String firsName;
+    private String firstName;
 
     @Column
     private String lastName;
 
     @Column
     private String email;
+
+    @Column
+    private int age;
 
     private String password;
 
@@ -34,12 +37,13 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "roles_id"))
     private Set<Role> roles;
 
-    public User(String firsName, String lastName, String email, String password, Set<Role> roles) {
-        this.firsName = firsName;
+    public User(String firstName, String lastName, String email, int age, String password, Set<Role> roles) {
+        this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.roles = roles;
+        this.age = age;
     }
 
     public User() {
@@ -53,8 +57,8 @@ public class User implements UserDetails {
         this.id = id;
     }
 
-    public void setFirsName(String firstName) {
-        this.firsName = firstName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public void setPassword(String lastName) {
@@ -77,8 +81,8 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
-    public String getFirsName() {
-        return firsName;
+    public String getFirstName() {
+        return firstName;
     }
 
     public String getLastName() {
@@ -87,6 +91,14 @@ public class User implements UserDetails {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public String getPassword() {

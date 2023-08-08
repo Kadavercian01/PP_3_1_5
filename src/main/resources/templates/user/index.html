@@ -28,7 +28,7 @@
     <div class="row m-0 vh-100">
         <div class="col-2 p-0 vh-100 bg-white">
             <div class="mt-2 bg-primary text-white rounded">
-                <p class="m-0 p-2" th:text="${authUser.getFirsName()}"></p>
+                <p class="m-0 p-2">User</p>
             </div>
         </div>
         <div class="col-10 bg-light vh-100">
@@ -51,9 +51,9 @@
                         </tr>
                         <tr class="bg-light">
                             <th class="font-weight-normal" scope="col" th:text="${authUser.getId()}"></th>
-                            <th class="font-weight-normal" scope="col" th:text="${authUser.getFirsName()}"></th>
+                            <th class="font-weight-normal" scope="col" th:text="${authUser.getFirstName()}"></th>
                             <th class="font-weight-normal" scope="col" th:text="${authUser.getLastName()}"></th>
-                            <th class="font-weight-normal" scope="col" th:text="${authUser.getId()}"></th>
+                            <th class="font-weight-normal" scope="col" th:text="${authUser.getAge()}"></th>
                             <th class="font-weight-normal" scope="col" th:text="${authUser.getEmail()}"></th>
                             <th class="font-weight-normal" scope="col" th:text="${authUser.getRoles()}"></th>
                             </th>

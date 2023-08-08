@@ -12,7 +12,7 @@ public class Role implements GrantedAuthority {
     @GeneratedValue(generator = "increment")
     private long id;
 
-    @Column()
+    @Column(name = "name")
     private String name;
 
     @Transient

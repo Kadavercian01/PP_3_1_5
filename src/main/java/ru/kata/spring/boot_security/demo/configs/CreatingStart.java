@@ -36,11 +36,11 @@ public class CreatingStart {
 
         roleService.saveRole(userRole);
 
-        User admin = new User("Вася_Админ", "Вася_фамилия","admin@mail.ru", "admin", adminRoles);
+        User admin = new User("Вася_Админ", "Вася_фамилия","admin@mail.ru", 20, "admin", adminRoles);
 
         userService.create(admin);
 
-        User user = new User("user", "user","user@mail.ru", "user", userRoles);
+        User user = new User("user", "user","user@mail.ru", 30, "user", userRoles);
 
         userService.create(user);
     }
