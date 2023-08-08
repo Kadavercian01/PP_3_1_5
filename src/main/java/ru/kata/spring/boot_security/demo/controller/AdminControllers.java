@@ -1,6 +1,7 @@
 package ru.kata.spring.boot_security.demo.controller;
 
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,6 +19,7 @@ public class AdminControllers {
     private final UserService userService;
     private final RoleService roleService;
 
+    @Autowired
     public AdminControllers(UserService usersService, RoleService roleService) {
         this.userService = usersService;
         this.roleService = roleService;
@@ -26,7 +28,7 @@ public class AdminControllers {
     @GetMapping
     public String getAdmin(Principal principal, Model model) {
         model.addAttribute("users", userService.getListUsers());
-        model.addAttribute("authUser", userService.getUser(principal.getName()));
+        model.addAttribute("user", userService.getUser(principal.getName()));
         System.out.println("Principal is: " + principal);
         return "admin/index";
     }
