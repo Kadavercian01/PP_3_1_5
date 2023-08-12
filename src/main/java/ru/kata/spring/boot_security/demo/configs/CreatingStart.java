@@ -33,15 +33,10 @@ public class CreatingStart {
         Role userRole = new Role("USER");
         Set<Role> userRoles = new HashSet<>();
         userRoles.add(userRole);
-
         roleService.saveRole(userRole);
-
         User admin = new User("Вася_Админ", "Вася_фамилия","admin@mail.ru", 20, "admin", adminRoles);
-
         userService.create(admin);
-
         User user = new User("user", "user","user@mail.ru", 30, "user", userRoles);
-
         userService.create(user);
     }
 }

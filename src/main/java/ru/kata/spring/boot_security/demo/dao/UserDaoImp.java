@@ -8,7 +8,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.repositories.UserRepository;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -33,7 +32,6 @@ public class UserDaoImp implements UserDao, UserDetailsService {
         @Override
         public User findUserById(long id) {
             Optional<User> foundUser = userRepository.findById(id);
-
             return foundUser.orElse(null);
         }
 
@@ -43,9 +41,8 @@ public class UserDaoImp implements UserDao, UserDetailsService {
         }
 
         @Override
-        public void updateUser(User updateUser, long id) {
+        public void updateUser(User updateUser) {
             updateUser.setPassword(passwordEncoder.encode(updateUser.getPassword()));
-            updateUser.setId(id);
             userRepository.save(updateUser);
         }
 

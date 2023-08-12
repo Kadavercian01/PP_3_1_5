@@ -5,7 +5,6 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import java.util.Collection;
 import java.util.Set;
 
@@ -28,6 +27,7 @@ public class User implements UserDetails {
     @Column
     private int age;
 
+    @Column
     private String password;
 
     @Fetch(FetchMode.JOIN)

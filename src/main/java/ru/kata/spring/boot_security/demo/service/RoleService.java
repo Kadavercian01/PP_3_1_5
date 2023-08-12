@@ -9,5 +9,4 @@ public interface RoleService {
 
     void saveRole(Role role);
 
-    Role getRoleById(long id);
 }
