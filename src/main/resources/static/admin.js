@@ -4,12 +4,17 @@ const url = "http://localhost:8080/restAdmin";
 
 function getAllUsers() {
     setTimeout(() => {
-        fetch(url)
+        fetch(url + "/users")
             .then(res => res.json())
             .then(data => {
                 loadUsers(data)
             })
     }, 200)
+}
+
+function getUserInfo() {
+    fetch(url + "/authentication").then(response => response.json()).then(user =>
+        loadUser(user))
 }
 
 const roleList = []
@@ -43,7 +48,16 @@ function loadUsers(users) {
     document.getElementById('adminTableBody').innerHTML = StringHtmlTable;
 }
 
+function loadUser(user) {
+    document.getElementById('infoUserAdminPage').innerHTML = `
+    <p class="pl-4 pt-1 pb-1 m-0 font-weight-bold"">${user.email}</p>
+    <p class="font-weight-normal pl-1 pt-1 pb-1 m-0">with role:</p>
+    <p class="pt-1 pb-1 m-0 pl-1">${user.roles.map(role => role.name).join(' ')}</p>
+    `;
+}
+
 getAllUsers();
+getUserInfo();
 
 //блок модал окна редактирования
 
@@ -165,7 +179,7 @@ function functionAddNewUser() {
             'Content-Type': 'application/json',
         },
         body : newUserBody
-    }).then(before => {
+    }).then(() => {
         newUserForm.reset()
         getAllUsers()
     })
