@@ -24,7 +24,9 @@ public class RestUserController {
 
     @GetMapping({"", "/"})
     public ResponseEntity<User> showUser(Principal principal) {
-        User user = userService.getUser(principal.getName());
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        User user = userService.findByEmail(principal.getName());
+        return user!= null
+                ? new ResponseEntity<>(user, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }

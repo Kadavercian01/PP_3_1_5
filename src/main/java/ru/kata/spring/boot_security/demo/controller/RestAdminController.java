@@ -2,6 +2,7 @@ package ru.kata.spring.boot_security.demo.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
+@Secured("ADMIN")
 @RequestMapping("/restAdmin")
 public class RestAdminController {
 
@@ -33,27 +35,36 @@ public class RestAdminController {
 
     @GetMapping("/users")
     public ResponseEntity<List<User>> getAllUsers() {
-        List<User> users = userService.getListUsers();
-        return new ResponseEntity<>(users, HttpStatus.OK);
+        List<User> users = userService.getListUsers().stream().toList();
+        return !users.isEmpty()
+                ? new ResponseEntity<>(users, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/roles")
     public ResponseEntity<List<Role>> getAllRoles() {
-        List<Role> roleList = roleService.getAllRoles();
-        return new ResponseEntity(roleList, HttpStatus.OK);
+        List<Role> roleList = roleService.getAllRoles().stream().toList();
+        return !roleList.isEmpty()
+                ? new ResponseEntity<>(roleList, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
 
     @GetMapping("users/{id}")
     public ResponseEntity<User> showUser(@PathVariable("id") long id) {
         User user = userService.getUser(id);
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        return user!= null
+                ? new ResponseEntity<>(user, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @PostMapping("/userNew")
-    public ResponseEntity<HttpStatus> saveUser(@RequestBody User user) {
+    public ResponseEntity<User> saveUser(@RequestBody User user) {
         userService.create(user);
-        return new ResponseEntity<>(HttpStatus.OK);
+        User newUser = userService.findByEmail(user.getEmail());
+        return newUser != null
+                ? new ResponseEntity<>(newUser, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @DeleteMapping("/users/{id}")

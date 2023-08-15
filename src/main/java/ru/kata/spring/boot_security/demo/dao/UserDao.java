@@ -16,5 +16,5 @@ public interface UserDao {
 
     void deleteUser(long id);
 
-    User findByUsername(String findByEmail);
+    User findByEmail(String findByEmail);
 }
