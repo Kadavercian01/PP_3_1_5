@@ -43,7 +43,6 @@ public class UserDaoImp implements UserDao, UserDetailsService {
 
         @Override
         public void updateUser(User updateUser) {
-            updateUser.setPassword(passwordEncoder.encode(updateUser.getPassword()));
             userRepository.save(updateUser);
         }
 
