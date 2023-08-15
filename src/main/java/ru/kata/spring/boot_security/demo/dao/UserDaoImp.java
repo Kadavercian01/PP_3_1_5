@@ -1,6 +1,7 @@
 package ru.kata.spring.boot_security.demo.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -18,7 +19,7 @@ public class UserDaoImp implements UserDao, UserDetailsService {
         private final PasswordEncoder passwordEncoder;
 
         @Autowired
-        public UserDaoImp(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        public UserDaoImp(UserRepository userRepository,@Lazy PasswordEncoder passwordEncoder) {
             this.userRepository = userRepository;
             this.passwordEncoder = passwordEncoder;
         }
