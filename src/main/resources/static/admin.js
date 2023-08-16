@@ -53,7 +53,6 @@ function loadUser(user) {
     <p class="pl-4 pt-1 pb-1 m-0 font-weight-bold"">${user.email}</p>
     <p class="font-weight-normal pl-1 pt-1 pb-1 m-0">with role:</p>
     <p className="pt-1 pb-1 m-0 pl-1">${user.roles.map(role => role.name).join(' ')}</p>
-
     `;
 }
 

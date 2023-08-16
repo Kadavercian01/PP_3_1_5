@@ -2,7 +2,6 @@ package ru.kata.spring.boot_security.demo.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.model.Role;
@@ -13,8 +12,6 @@ import java.security.Principal;
 import java.util.List;
 
 @RestController
-@CrossOrigin
-@Secured("ADMIN")
 @PreAuthorize("hasRole('ROLE_ADMIN')")
 @RequestMapping("/restAdmin")
 public class RestAdminController {
