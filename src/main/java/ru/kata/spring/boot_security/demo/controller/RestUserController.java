@@ -13,7 +13,7 @@ import java.security.Principal;
 
 
 @RestController
-@PreAuthorize("hasRole('USER')")
+@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 @RequestMapping("/restUser")
 public class RestUserController {
     private final UserService userService;
