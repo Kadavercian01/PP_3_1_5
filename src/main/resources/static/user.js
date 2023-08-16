@@ -9,7 +9,7 @@ function getUserPage() {
 function getInformationAboutUser(user) {
     document.getElementById('UserInfoTable').innerHTML = `<tr>
     <th><p class="font-weight-normal">${user.id}</p></th>
-    <th><p class="font-weight-normal">${user.firstName}</p></th>
+    <th><p class="font-weight-normal">${user.username}</p></th>
     <th><p class="font-weight-normal">${user.lastName}</p></th>
     <th><p class="font-weight-normal">${user.age}</p></th>
     <th><p class="font-weight-normal">${user.email}</p></th>

@@ -11,9 +11,8 @@ import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.UserService;
 import java.security.Principal;
 
-
 @RestController
-@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+@PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
 @RequestMapping("/restUser")
 public class RestUserController {
     private final UserService userService;
@@ -25,7 +24,7 @@ public class RestUserController {
 
     @GetMapping({"", "/"})
     public ResponseEntity<User> showUser(Principal principal) {
-        User user = userService.findByEmail(principal.getName());
+        User user = userService.findByUsername(principal.getName());
         return user!= null
                 ? new ResponseEntity<>(user, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);

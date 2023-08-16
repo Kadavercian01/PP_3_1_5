@@ -9,14 +9,13 @@ import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
-
 import java.security.Principal;
 import java.util.List;
 
 @RestController
 @CrossOrigin
 @Secured("ADMIN")
-@PreAuthorize("hasRole('ADMIN')")
+@PreAuthorize("hasRole('ROLE_ADMIN')")
 @RequestMapping("/restAdmin")
 public class RestAdminController {
 
@@ -30,7 +29,7 @@ public class RestAdminController {
 
     @GetMapping("/user")
     public ResponseEntity<User> showUser(Principal principal) {
-        User user = userService.findByEmail(principal.getName());
+        User user = userService.findByUsername(principal.getName());
         return user!= null
                 ? new ResponseEntity<>(user, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -38,7 +37,7 @@ public class RestAdminController {
 
     @GetMapping("/users")
     public ResponseEntity<List<User>> getAllUsers() {
-        List<User> users = userService.getListUsers().stream().toList();
+        List<User> users = userService.getAllUsers();
         return !users.isEmpty()
                 ? new ResponseEntity<>(users, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -46,7 +45,7 @@ public class RestAdminController {
 
     @GetMapping("/roles")
     public ResponseEntity<List<Role>> getAllRoles() {
-        List<Role> roleList = roleService.getAllRoles().stream().toList();
+        List<Role> roleList = roleService.getAllRoles();
         return !roleList.isEmpty()
                 ? new ResponseEntity<>(roleList, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -55,7 +54,7 @@ public class RestAdminController {
 
     @GetMapping("users/{id}")
     public ResponseEntity<User> showUser(@PathVariable("id") long id) {
-        User user = userService.getUser(id);
+        User user = userService.getUserById(id);
         return user!= null
                 ? new ResponseEntity<>(user, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -63,8 +62,8 @@ public class RestAdminController {
 
     @PostMapping("/userNew")
     public ResponseEntity<User> saveUser(@RequestBody User user) {
-        userService.create(user);
-        User newUser = userService.findByEmail(user.getEmail());
+        userService.save(user);
+        User newUser = userService.findByUsername(user.getUsername());
         return newUser != null
                 ? new ResponseEntity<>(newUser, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -72,7 +71,7 @@ public class RestAdminController {
 
     @DeleteMapping("/users/{id}")
     public ResponseEntity<HttpStatus> deleteEvent(@PathVariable("id") long id) {
-        userService.delete(id);
+        userService.deleteUser(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

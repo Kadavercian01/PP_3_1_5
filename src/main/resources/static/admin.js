@@ -36,7 +36,7 @@ function loadUsers(users) {
         StringHtmlTable +=
             `<tr>
                 <th><p class="font-weight-normal">${user.id}</p></th>
-                <th><p class="font-weight-normal">${user.firstName}</p></th>
+                <th><p class="font-weight-normal">${user.username}</p></th>
                 <th><p class="font-weight-normal">${user.lastName}</p></th>
                 <th><p class="font-weight-normal">${user.age}</p></th>
                 <th><p class="font-weight-normal">${user.email}</p></th>
@@ -75,7 +75,7 @@ function editFunction(event) {
     event.preventDefault()
     let updateUser = JSON.stringify({
         id : $(`#editId`).val(),
-        firstName: $(`#editFirstName`).val(),
+        username: $(`#editFirstName`).val(),
         lastName : $(`#editLastName`).val(),
         age: $(`#editAge`).val(),
         email: $(`#emailEdit`).val(),
@@ -99,7 +99,7 @@ function edit(id) {
     fetch(url + "/users" + `/${id}`).then(response => {
         response.json().then(user => {
             $(`#editId`).val(user.id)
-            $(`#editFirstName`).val(user.firstName)
+            $(`#editFirstName`).val(user.username)
             $(`#editLastName`).val(user.lastName)
             $(`#editAge`).val(user.age)
             $(`#emailEdit`).val(user.email)
@@ -144,7 +144,7 @@ function deleteInput(id) {
     fetch(url +  "/users" + `/${id}`).then(response => {
         response.json().then(user => {
             $(`#idDelete`).val(user.id)
-            $(`#FirstNameDelete`).val(user.firstName)
+            $(`#FirstNameDelete`).val(user.username)
             $(`#LastNameDelete`).val(user.lastName)
             $(`#ageDelete`).val(user.age)
             $(`#emailDelete`).val(user.email)
@@ -167,7 +167,7 @@ function getRoleNew() {
 function functionAddNewUser() {
     let newUserForm = document.getElementById('newUser')
     let newUserBody = JSON.stringify({
-        firstName: $(`#firstNameNew`).val(),
+        username: $(`#firstNameNew`).val(),
         lastName : $(`#lastNameNew`).val(),
         age: $(`#ageNew`).val(),
         email: $(`#emailNew`).val(),
