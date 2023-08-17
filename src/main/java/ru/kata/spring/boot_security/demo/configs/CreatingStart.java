@@ -13,12 +13,10 @@ import java.util.Collections;
 @Component
 public class CreatingStart {
 
-    @Autowired
     private final UserService userService;
-
-    @Autowired
     private final RoleRepository roleRepository;
 
+    @Autowired
     public CreatingStart(UserService userService, RoleRepository roleRepository) {
         this.roleRepository = roleRepository;
         this.userService = userService;
